@@ -9,13 +9,33 @@ const juan = {
     }
 }
 
-Object.keys(juan)
-Object.getOwnPropertyNames(juan)
-Object.entries(juan)
-Object.getOwnPropertyDescriptors(juan)
-Object.defineProperties(juan, "pruebaNasa", {
-    value: "extraterrestres",
-    enumerable: true,
+// Object.keys(juan)
+// Object.getOwnPropertyNames(juan)
+// Object.entries(juan)
+
+Object.defineProperties(juan, "Navigator", {
+    value: "chrome",
+    enumerable: false,
     writable: true,
     configurable: true,
 })
+Object.defineProperties(juan, "editor", {
+    value: "VScode",
+    enumerable: true,
+    writable: false,
+    configurable: true,
+})
+Object.defineProperties(juan, "terminal", {
+    value: "WSL",
+    enumerable: true,
+    writable: true,
+    configurable: false,
+})
+Object.defineProperties(juan, "pruebaNasa", {
+    value: "extraterrestres",
+    enumerable: false,
+    writable: false,
+    configurable: false,
+})
+
+Object.getOwnPropertyDescriptors(juan)
