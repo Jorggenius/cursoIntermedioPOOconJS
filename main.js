@@ -1,10 +1,15 @@
 const obj1 = {
     a: "a",
     b: "b",
+    c: {
+      d: "d",
+      e: "e",  
+    },
+    editA(){
+        this.a = "AAAAAA";
+    }
 }
 
-const obj2 = {}
+const stringifiedComplexObj = JSON.stringify(obj1)
+const obj2 = JSON.parse(stringifiedComplexObj)
 
-for(prop in obj1){
-obj2[prop]
-}
