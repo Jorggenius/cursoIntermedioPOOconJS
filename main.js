@@ -36,21 +36,27 @@ function deepCopy(subject){
   return copySubject
 }
 
-// const studentBase = {
-//   name: undefined,
-//   email: undefined,
-//   age: undefined,
-//   approvedCourses: undefined,
-//   learningPaths: undefined,
-//   socialMedia: {
-//     twitter: undefined,
-//     instagram: undefined,
-//     facebook: undefined,
-//   },
-// }
 
 function requiredParam(param){
   throw new Error(param + "es obligatorio")
+}
+
+function createLearningPath({
+  name = requiredParam("name"),
+  courses = []
+}){
+  const private = {
+    "_name": name,
+    "_courses": courses,
+  }
+   
+  const public = {
+    get courses(){
+      return private["_courses"]
+    },
+  }
+
+  return public
 }
 
 
@@ -68,15 +74,14 @@ function createStudent({
 
   const private = {
     "_name": name,
+    "_learningPaths": learningPaths,
   }
   
   
   const public = { 
     email,
     age,
-    approvedCourses,
-    leraningPaths,
-    socialMedia:{
+    approvedCourslearningPaths    socialMedia:{
       twitter,
       instagram,
       facebook,
@@ -90,22 +95,28 @@ function createStudent({
       }else{
         console.warn("Tu nombre deve tener al menos 1 caracter")
       }
-    }
-    // readName(){
-    //   return private["_name"]
-    // },
-    // changeName(newName){
-    //   private["_name"] = newName
-    // },
+    },
+   
+    get learningPaths(){
+      return private["_learningPaths"]
+    },
+    set learningPaths(newLP){
+      if(!newLP.name){
+        console.warn("Tu LP no tiene la propiedad name")
+        return
+      }
+      if(!newLP.courses)){
+        console.warn("Tu LP no es una lista (*de cursos)")
+        return
+      }
+      if(!isArray(newLP.courses)){
+        console.warn("Tu LP no tiene courses")
+        return
+      }
+      private["_learningPaths"] = newLP
+      }
+    },
   }
-  // Object.defineProperty(public, "readName", {
-  //   writable: false,
-  //   configurable: false,
-  // })
-  // Object.defineProperty(public, "changeName", {
-  //   writable: false,
-  //   configurable: false,
-  // })
 
   return public
 }
