@@ -81,7 +81,8 @@ function createStudent({
   const public = { 
     email,
     age,
-    approvedCourslearningPaths    socialMedia:{
+    approvedCourslearningPaths,   
+     socialMedia:{
       twitter,
       instagram,
       facebook,
@@ -105,7 +106,7 @@ function createStudent({
         console.warn("Tu LP no tiene la propiedad name")
         return
       }
-      if(!newLP.courses)){
+      if(!newLP.courses){
         console.warn("Tu LP no es una lista (*de cursos)")
         return
       }
@@ -113,13 +114,16 @@ function createStudent({
         console.warn("Tu LP no tiene courses")
         return
       }
-      private["_learningPaths"] = newLP
+      private["_learningPaths"].push(newLP)
       }
-    },
-  }
+    }
+  
+    return public
+  
+ }
 
-  return public
-}
+
+
 
 const juan = createStudent({
   name: "Juanito", 
