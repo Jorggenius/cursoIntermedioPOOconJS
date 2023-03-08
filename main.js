@@ -75,7 +75,7 @@ function Student({
   approvedCourses = [],
   learningPaths = [],
 } = {})
-{
+
 
  
   this.name = name;
@@ -87,68 +87,32 @@ function Student({
     instagram,
     facebook,
   }
-  if(!isArray(learningPaths) ){
-    this.learningPaths = []
-    for(learningPaths in learningPaths){
-      if(!learningPaths[learningPaths] instanceof LearningPath){
-      console.warn("learninPath no es un verdadero learningPath")
-      return
+  const private = {
+    "_learningPaths": []
+  }
+
+  Object.defineProperty(this, "learningpaths", {
+    get(){
+      return private[_learningPaths]
+    },
+    set(newLp){ 
+      if(newLp instanceof LearningPath){
+        private["_learningPaths"].push(newLp)
+      
+      }else{
+        console.warn("Alguno de los LPs ne es una instancia del prototipo LearningPath ")
       }
     }
+  })
+
+  
+    for(learningPaths in learningPaths){
+      this.learningPaths = learningPaths[learningPaths] 
   }
  
-  this.learningPaths = learningPaths;
 
-  // const private = {
-  //   "_name": name,
-  //   "_learningPaths": learningPaths,
-  // }
-  
-  
-  // const public = { 
-  //   email,
-  //   age,
-  //   approvedCourslearningPaths,   
-  //    socialMedia:{
-  //     twitter,
-  //     instagram,
-  //     facebook,
-  //   },
-  //   get name(){
-  //     return private["_name"]
-  //   },
-  //   set name(newName){
-  //     if(newName.length != 0){
-  //       return private["_name"] = newName
-  //     }else{
-  //       console.warn("Tu nombre deve tener al menos 1 caracter")
-  //     }
-  //   },
-   
-  //   get learningPaths(){
-  //     return private["_learningPaths"]
-  //   },
-  //   set learningPaths(newLP){
-  //     if(!newLP.name){
-  //       console.warn("Tu LP no tiene la propiedad name")
-  //       return
-  //     }
-  //     if(!newLP.courses){
-  //       console.warn("Tu LP no es una lista (*de cursos)")
-  //       return
-  //     }
-  //     if(!isArray(newLP.courses)){
-  //       console.warn("Tu LP no tiene courses")
-  //       return
-  //     }
-  //     private["_learningPaths"].push(newLP)
-  //     }
-  //   }
-  
-  //   return public
-  
- }
 
+ 
 
 
 
